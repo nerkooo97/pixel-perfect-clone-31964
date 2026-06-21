@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ZahtjevRouteImport } from './routes/zahtjev'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as FunkcionalnostiRouteImport } from './routes/funkcionalnosti'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ZahtjevRoute = ZahtjevRouteImport.update({
@@ -29,6 +30,11 @@ const KontaktRoute = KontaktRouteImport.update({
   path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FunkcionalnostiRoute = FunkcionalnostiRouteImport.update({
+  id: '/funkcionalnosti',
+  path: '/funkcionalnosti',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/funkcionalnosti': typeof FunkcionalnostiRoute
   '/kontakt': typeof KontaktRoute
   '/pricing': typeof PricingRoute
   '/zahtjev': typeof ZahtjevRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/funkcionalnosti': typeof FunkcionalnostiRoute
   '/kontakt': typeof KontaktRoute
   '/pricing': typeof PricingRoute
   '/zahtjev': typeof ZahtjevRoute
@@ -50,20 +58,28 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/funkcionalnosti': typeof FunkcionalnostiRoute
   '/kontakt': typeof KontaktRoute
   '/pricing': typeof PricingRoute
   '/zahtjev': typeof ZahtjevRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kontakt' | '/pricing' | '/zahtjev'
+  fullPaths: '/' | '/funkcionalnosti' | '/kontakt' | '/pricing' | '/zahtjev'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kontakt' | '/pricing' | '/zahtjev'
-  id: '__root__' | '/' | '/kontakt' | '/pricing' | '/zahtjev'
+  to: '/' | '/funkcionalnosti' | '/kontakt' | '/pricing' | '/zahtjev'
+  id:
+    | '__root__'
+    | '/'
+    | '/funkcionalnosti'
+    | '/kontakt'
+    | '/pricing'
+    | '/zahtjev'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FunkcionalnostiRoute: typeof FunkcionalnostiRoute
   KontaktRoute: typeof KontaktRoute
   PricingRoute: typeof PricingRoute
   ZahtjevRoute: typeof ZahtjevRoute
@@ -92,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/funkcionalnosti': {
+      id: '/funkcionalnosti'
+      path: '/funkcionalnosti'
+      fullPath: '/funkcionalnosti'
+      preLoaderRoute: typeof FunkcionalnostiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +127,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FunkcionalnostiRoute: FunkcionalnostiRoute,
   KontaktRoute: KontaktRoute,
   PricingRoute: PricingRoute,
   ZahtjevRoute: ZahtjevRoute,
