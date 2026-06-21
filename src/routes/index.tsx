@@ -40,6 +40,7 @@ import { Logo } from "@/components/Logo";
 function Nav() {
   const items = [
     { label: "Početna", href: "/" },
+    { label: "Funkcionalnosti", href: "/funkcionalnosti" },
     { label: "Cjenovnik", href: "/pricing" },
   ];
   return (
