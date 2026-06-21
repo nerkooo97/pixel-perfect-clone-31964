@@ -24,6 +24,9 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import webMockup from "@/assets/web-mockup.jpg";
+import employeeMockup from "@/assets/employee-app-mockup.jpg";
+import clientMockup from "@/assets/client-app-mockup.jpg";
 
 export const Route = createFileRoute("/funkcionalnosti")({
   head: () => ({
@@ -128,7 +131,7 @@ type Feature = { icon: typeof Calendar; t: string; d: string };
 
 function FeatureGrid({ features }: { features: Feature[] }) {
   return (
-    <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-8 grid gap-4 sm:grid-cols-2">
       {features.map((f) => (
         <div
           key={f.t}
@@ -141,6 +144,25 @@ function FeatureGrid({ features }: { features: Feature[] }) {
           <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{f.d}</p>
         </div>
       ))}
+    </div>
+  );
+}
+
+function MockupFrame({ src, alt, tone = "neutral" }: { src: string; alt: string; tone?: "neutral" | "warm" | "rose" }) {
+  const bg =
+    tone === "warm"
+      ? "bg-gradient-to-br from-amber-50 to-brand/10"
+      : tone === "rose"
+      ? "bg-gradient-to-br from-rose-50 to-brand/10"
+      : "bg-gradient-to-br from-muted to-background";
+  return (
+    <div className={`overflow-hidden rounded-2xl border border-border ${bg} p-4 md:p-6`}>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="mx-auto h-auto w-full max-w-md rounded-xl object-contain"
+      />
     </div>
   );
 }
@@ -221,7 +243,12 @@ function WebSection() {
           description="Vaša online vitrina koja radi za vas 24 sata dnevno — privlači nove klijente, prima rezervacije i gradi vaš brend."
           icon={Globe}
         />
-        <FeatureGrid features={webFeatures} />
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+          <MockupFrame src={webMockup} alt="Pregled web stranice sa kalendarom rezervacija" tone="warm" />
+          <div>
+            <FeatureGrid features={webFeatures} />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -237,7 +264,12 @@ function EmployeeSection() {
           description="Sve što je vašem timu potrebno za upravljanje radnim danom — od rasporeda do kartona klijenata, sve u jednoj aplikaciji na mobitelu ili tabletu."
           icon={Smartphone}
         />
-        <FeatureGrid features={employeeFeatures} />
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+          <MockupFrame src={employeeMockup} alt="Mobilna aplikacija za uposlenike sa rasporedom termina" tone="neutral" />
+          <div>
+            <FeatureGrid features={employeeFeatures} />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -253,7 +285,12 @@ function ClientSection() {
           description="Brendirana mobilna aplikacija na ime vašeg salona — dostupna na App Store-u i Google Play-u, sa vašim logom i bojama."
           icon={Heart}
         />
-        <FeatureGrid features={clientFeatures} />
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+          <MockupFrame src={clientMockup} alt="Mobilna aplikacija za klijente sa katalogom usluga i loyalty karticom" tone="rose" />
+          <div>
+            <FeatureGrid features={clientFeatures} />
+          </div>
+        </div>
       </div>
     </section>
   );
