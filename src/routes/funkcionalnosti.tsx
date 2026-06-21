@@ -243,7 +243,12 @@ function WebSection() {
           description="Vaša online vitrina koja radi za vas 24 sata dnevno — privlači nove klijente, prima rezervacije i gradi vaš brend."
           icon={Globe}
         />
-        <FeatureGrid features={webFeatures} />
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+          <MockupFrame src={webMockup} alt="Pregled web stranice sa kalendarom rezervacija" tone="warm" />
+          <div>
+            <FeatureGrid features={webFeatures} />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -259,7 +264,12 @@ function EmployeeSection() {
           description="Sve što je vašem timu potrebno za upravljanje radnim danom — od rasporeda do kartona klijenata, sve u jednoj aplikaciji na mobitelu ili tabletu."
           icon={Smartphone}
         />
-        <FeatureGrid features={employeeFeatures} />
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+          <MockupFrame src={employeeMockup} alt="Mobilna aplikacija za uposlenike sa rasporedom termina" tone="neutral" />
+          <div>
+            <FeatureGrid features={employeeFeatures} />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -275,7 +285,12 @@ function ClientSection() {
           description="Brendirana mobilna aplikacija na ime vašeg salona — dostupna na App Store-u i Google Play-u, sa vašim logom i bojama."
           icon={Heart}
         />
-        <FeatureGrid features={clientFeatures} />
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+          <MockupFrame src={clientMockup} alt="Mobilna aplikacija za klijente sa katalogom usluga i loyalty karticom" tone="rose" />
+          <div>
+            <FeatureGrid features={clientFeatures} />
+          </div>
+        </div>
       </div>
     </section>
   );
