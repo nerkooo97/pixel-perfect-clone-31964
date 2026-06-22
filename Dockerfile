@@ -26,7 +26,8 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
+ENV HOST=0.0.0.0
+ENV NITRO_HOST=0.0.0.0
 
 # Create a non-root system user for security
 RUN addgroup --system --gid 1001 nodejs && \
