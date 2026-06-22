@@ -30,7 +30,7 @@ ENV HOST=0.0.0.0
 ENV NITRO_HOST=0.0.0.0
 
 # Create a non-root system user for security
-RUN addgroup --system --gid 1001 nodejs && \
+RUN addgroup --system --gid 1001 nodejs && \ 
     adduser --system --uid 1001 nodejs -G nodejs
 
 # Copy the built output from builder (includes public assets and server files)
