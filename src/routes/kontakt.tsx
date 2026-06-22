@@ -6,13 +6,13 @@ import { Logo } from "@/components/Logo";
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
-      { title: "Kontakt — RealEstate Pro" },
+      { title: "Kontakt — GlowBook App" },
       {
         name: "description",
         content:
           "Stupite u kontakt s nama. Odgovaramo na sva pitanja u najkraćem mogućem roku.",
       },
-      { property: "og:title", content: "Kontakt — RealEstate Pro" },
+      { property: "og:title", content: "Kontakt — GlowBook App" },
       {
         property: "og:description",
         content: "Stupite u kontakt s nama putem forme, emaila ili telefona.",
@@ -61,7 +61,7 @@ const infoCards = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@realestatepro.ba",
+    value: "info@glowbook.app",
     sub: "Odgovaramo u roku od 24h",
   },
   {
@@ -216,7 +216,7 @@ function Footer() {
     <footer className="mx-auto max-w-6xl px-6 py-8">
       <div className="flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
         <Logo />
-        <p className="text-xs text-muted-foreground">2025 RealEstate Pro</p>
+        <p className="text-xs text-muted-foreground">2025 GlowBook App</p>
       </div>
     </footer>
   );

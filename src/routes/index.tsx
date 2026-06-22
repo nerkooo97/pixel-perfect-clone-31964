@@ -13,22 +13,26 @@ import {
   Search,
   Plus,
   Bell,
+  Sparkles,
+  Scissors,
+  Flower2,
+  HeartPulse,
 } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "RealEstate Pro — Rješenje koje mijenja vaše poslovanje!" },
+      { title: "GlowBook App — Rješenje koje mijenja vaše poslovanje!" },
       {
         name: "description",
         content:
           "Mobilna aplikacija i web stranica za vaše klijente i pametni sistem za vaše zaposlenike. Povećajte broj rezervacija i izgradite brend koji klijenti obožavaju.",
       },
-      { property: "og:title", content: "RealEstate Pro" },
+      { property: "og:title", content: "GlowBook App" },
       {
         property: "og:description",
-        content: "The all-in-one platform for modern real estate teams.",
+        content: "The all-in-one platform for modern beauty salons and clinics.",
       },
     ],
   }),
@@ -68,8 +72,9 @@ function Nav() {
 }
 
 function Hero() {
+  const [activeDevice, setActiveDevice] = useState<"web" | "employee" | "client">("web");
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-16 pb-10">
+    <section className="mx-auto max-w-6xl px-6 pt-16 pb-16">
       <div className="grid gap-8 md:grid-cols-2 md:gap-12">
         <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight text-foreground md:text-5xl">
           Rješenje koje mijenja
@@ -90,12 +95,171 @@ function Hero() {
           </div>
         </div>
       </div>
-      <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-muted">
-        <img
-          src="https://placehold.co/1200x600?text=Dashboard+Preview"
-          alt="Dashboard preview"
-          className="h-auto w-full"
-        />
+
+      {/* Multi-Device Presentation */}
+      <div className="relative mt-16 w-full flex flex-col items-center justify-center select-none overflow-visible pb-12">
+        {/* Ambient Glow */}
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-brand/10 blur-3xl -top-24 -left-24 pointer-events-none" />
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-brand/10 blur-3xl -bottom-24 -right-24 pointer-events-none" />
+
+        {/* Mobile Switcher Tabs */}
+        <div className="flex sm:hidden justify-center gap-1.5 mb-6 bg-muted/65 p-1 rounded-full max-w-[320px] mx-auto w-full border border-border/40 z-20">
+          {[
+            { id: "web", label: "Web Platforma" },
+            { id: "employee", label: "App Uposlenici" },
+            { id: "client", label: "App Klijenti" },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveDevice(tab.id as any)}
+              className={`flex-1 py-1.5 px-3 text-xs font-semibold rounded-full transition-all ${
+                activeDevice === tab.id
+                  ? "bg-brand text-white shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Desktop Layout: Show all devices overlapping */}
+        <div className="hidden sm:flex relative w-full max-w-5xl items-center justify-center overflow-visible">
+          {/* 1. Desktop Computer Mockup in the Background */}
+          <div className="w-[80%] md:w-[75%] flex flex-col items-center z-10 transition-transform duration-500 hover:scale-[1.01]">
+            {/* Browser Frame */}
+            <div className="w-full rounded-t-2xl border-[6px] border-neutral-900 bg-neutral-900 shadow-2xl overflow-hidden aspect-[16/10]">
+              {/* Browser header bar */}
+              <div className="h-5 bg-neutral-900 px-3 flex items-center gap-1.5">
+                <div className="w-2 h-2 rounded-full bg-red-500/80" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500/80" />
+                <div className="w-2 h-2 rounded-full bg-green-500/80" />
+              </div>
+              <img
+                src="https://placehold.co/1200x750?text=Web+Dashboard"
+                alt="Web Dashboard"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {/* Laptop/Desktop Base */}
+            <div className="w-[112%] h-[6px] sm:h-[8px] bg-neutral-800 rounded-b-xl border-t border-neutral-700 shadow-md" />
+            <div className="w-[20%] h-[3px] sm:h-[4px] bg-neutral-950 rounded-b-md" />
+          </div>
+
+          {/* 2. Left iPhone Mockup (Employee App) */}
+          <div
+            className="absolute left-[4%] md:left-[7%] bottom-[-35px] md:bottom-[-45px] z-20 w-[155px] md:w-[190px] shrink-0 transition-all duration-500 hover:-translate-y-2 hover:scale-105"
+            style={{ aspectRatio: "9/19.5" }}
+          >
+            <div className="relative w-full h-full rounded-[24px] sm:rounded-[32px] md:rounded-[36px] p-[6px] sm:p-[8px] md:p-[10px] bg-neutral-900 shadow-2xl ring-2 ring-neutral-800/10 overflow-hidden">
+              {/* Dynamic Island */}
+              <div className="absolute top-[3%] left-1/2 -translate-x-1/2 w-[35%] h-[5%] rounded-full bg-neutral-900 z-30 flex items-center justify-center">
+                <div className="w-[12%] h-[24%] rounded-full bg-neutral-950/80 mr-[8%]" />
+                <div className="w-[6%] h-[12%] rounded-full bg-neutral-950/80" />
+              </div>
+              {/* Speaker Line */}
+              <div className="absolute top-[1.5%] left-1/2 -translate-x-1/2 w-[15%] h-[1%] rounded-full bg-neutral-950 z-30" />
+              {/* Screen Content */}
+              <div className="relative w-full h-full rounded-[18px] sm:rounded-[24px] md:rounded-[26px] overflow-hidden bg-neutral-100 border border-neutral-950">
+                <img
+                  src="https://placehold.co/600x1200?text=App+Uposlenici"
+                  alt="Employee App"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* 3. Right iPhone Mockup (Client App) */}
+          <div
+            className="absolute right-[4%] md:right-[7%] bottom-[-35px] md:bottom-[-45px] z-20 w-[155px] md:w-[190px] shrink-0 transition-all duration-500 hover:-translate-y-2 hover:scale-105"
+            style={{ aspectRatio: "9/19.5" }}
+          >
+            <div className="relative w-full h-full rounded-[24px] sm:rounded-[32px] md:rounded-[36px] p-[6px] sm:p-[8px] md:p-[10px] bg-neutral-900 shadow-2xl ring-2 ring-neutral-800/10 overflow-hidden">
+              {/* Dynamic Island */}
+              <div className="absolute top-[3%] left-1/2 -translate-x-1/2 w-[35%] h-[5%] rounded-full bg-neutral-900 z-30 flex items-center justify-center">
+                <div className="w-[12%] h-[24%] rounded-full bg-neutral-950/80 mr-[8%]" />
+                <div className="w-[6%] h-[12%] rounded-full bg-neutral-950/80" />
+              </div>
+              {/* Speaker Line */}
+              <div className="absolute top-[1.5%] left-1/2 -translate-x-1/2 w-[15%] h-[1%] rounded-full bg-neutral-950 z-30" />
+              {/* Screen Content */}
+              <div className="relative w-full h-full rounded-[18px] sm:rounded-[24px] md:rounded-[26px] overflow-hidden bg-neutral-100 border border-neutral-950">
+                <img
+                  src="https://placehold.co/600x1200?text=App+Klijenti"
+                  alt="Client App"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Layout: Show only active device */}
+        <div className="flex sm:hidden w-full items-center justify-center overflow-visible animate-fade-in">
+          {activeDevice === "web" && (
+            <div className="w-[90%] flex flex-col items-center">
+              <div className="w-full rounded-t-xl border-[4px] border-neutral-900 bg-neutral-900 shadow-xl overflow-hidden aspect-[16/10]">
+                <div className="h-4 bg-neutral-900 px-2 flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-500/80" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/80" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500/80" />
+                </div>
+                <img
+                  src="https://placehold.co/1200x750?text=Web+Dashboard"
+                  alt="Web Dashboard"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="w-[112%] h-[4px] bg-neutral-800 rounded-b-lg border-t border-neutral-700 shadow-sm" />
+              <div className="w-[20%] h-[2px] bg-neutral-950 rounded-b-xs" />
+            </div>
+          )}
+
+          {activeDevice === "employee" && (
+            <div className="w-[150px] shrink-0 animate-fade-in" style={{ aspectRatio: "9/19.5" }}>
+              <div className="relative w-full h-full rounded-[24px] p-[6px] bg-neutral-900 shadow-xl ring-2 ring-neutral-800/10 overflow-hidden">
+                {/* Dynamic Island */}
+                <div className="absolute top-[3%] left-1/2 -translate-x-1/2 w-[35%] h-[5%] rounded-full bg-neutral-900 z-30 flex items-center justify-center">
+                  <div className="w-[12%] h-[24%] rounded-full bg-neutral-950/80 mr-[8%]" />
+                  <div className="w-[6%] h-[12%] rounded-full bg-neutral-950/80" />
+                </div>
+                {/* Speaker Line */}
+                <div className="absolute top-[1.5%] left-1/2 -translate-x-1/2 w-[15%] h-[1%] rounded-full bg-neutral-950 z-30" />
+                {/* Screen Content */}
+                <div className="relative w-full h-full rounded-[18px] overflow-hidden bg-neutral-100 border border-neutral-950">
+                  <img
+                    src="https://placehold.co/600x1200?text=App+Uposlenici"
+                    alt="Employee App"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeDevice === "client" && (
+            <div className="w-[150px] shrink-0 animate-fade-in" style={{ aspectRatio: "9/19.5" }}>
+              <div className="relative w-full h-full rounded-[24px] p-[6px] bg-neutral-900 shadow-xl ring-2 ring-neutral-800/10 overflow-hidden">
+                {/* Dynamic Island */}
+                <div className="absolute top-[3%] left-1/2 -translate-x-1/2 w-[35%] h-[5%] rounded-full bg-neutral-900 z-30 flex items-center justify-center">
+                  <div className="w-[12%] h-[24%] rounded-full bg-neutral-950/80 mr-[8%]" />
+                  <div className="w-[6%] h-[12%] rounded-full bg-neutral-950/80" />
+                </div>
+                {/* Speaker Line */}
+                <div className="absolute top-[1.5%] left-1/2 -translate-x-1/2 w-[15%] h-[1%] rounded-full bg-neutral-950 z-30" />
+                {/* Screen Content */}
+                <div className="relative w-full h-full rounded-[18px] overflow-hidden bg-neutral-100 border border-neutral-950">
+                  <img
+                    src="https://placehold.co/600x1200?text=App+Klijenti"
+                    alt="Client App"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
@@ -109,9 +273,8 @@ function DashboardMock() {
         {tabs.map((t, i) => (
           <span
             key={t}
-            className={`rounded-full px-3 py-1 text-xs ${
-              i === 3 ? "bg-foreground text-background" : "text-muted-foreground"
-            }`}
+            className={`rounded-full px-3 py-1 text-xs ${i === 3 ? "bg-foreground text-background" : "text-muted-foreground"
+              }`}
           >
             {t}
           </span>
@@ -122,7 +285,7 @@ function DashboardMock() {
           <aside className="col-span-3 space-y-3 border-r border-border pr-3">
             <div className="flex items-center gap-2">
               <div className="h-5 w-5 rounded bg-brand" />
-              <span className="text-xs font-semibold">RealEstate Pro</span>
+              <span className="text-xs font-semibold">GlowBook App</span>
             </div>
             <div className="space-y-1 pt-2">
               {[
@@ -133,9 +296,8 @@ function DashboardMock() {
               ].map(([n, a]) => (
                 <div
                   key={n as string}
-                  className={`rounded px-2 py-1 text-[11px] ${
-                    a ? "bg-muted text-foreground" : "text-muted-foreground"
-                  }`}
+                  className={`rounded px-2 py-1 text-[11px] ${a ? "bg-muted text-foreground" : "text-muted-foreground"
+                    }`}
                 >
                   {n}
                 </div>
@@ -170,9 +332,8 @@ function DashboardMock() {
               {["Overview", "Transactions", "Payouts"].map((t, i) => (
                 <span
                   key={t}
-                  className={`rounded-md px-2 py-1 text-[10px] ${
-                    i === 0 ? "bg-muted text-foreground" : "text-muted-foreground"
-                  }`}
+                  className={`rounded-md px-2 py-1 text-[10px] ${i === 0 ? "bg-muted text-foreground" : "text-muted-foreground"
+                    }`}
                 >
                   {t}
                 </span>
@@ -292,7 +453,7 @@ function Features() {
 function RealtimeSection() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-12">
-      <div className="grid gap-8 rounded-2xl border border-border bg-card p-8 md:grid-cols-2 md:p-10">
+      <div className="grid gap-8 rounded-2xl border border-border bg-card p-8 md:grid-cols-2 md:p-10 items-center">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
             Kome je sistem namijenjen?
@@ -300,30 +461,81 @@ function RealtimeSection() {
           <p className="mt-3 text-sm text-muted-foreground">
             Naš sistem je krojen po mjeri biznisa u industriji ljepote, zdravlja i njege tijela koji žele podići svoje klijentsko iskustvo na viši nivo:
           </p>
-          <ul className="mt-6 space-y-4">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              ["Estetske i dermatološke klinike", "kojima je potreban siguran elektronski karton pacijenta sa detaljnim praćenjem historije tretmana i estetskih zahvata."],
-              ["Kozmetički saloni i saloni ljepote", "koji žele brzu rezervaciju tretmana lica, tijela ili epilacije uz ugrađen loyalty sistem za zadržavanje klijenata."],
-              ["Frizerski i stilski saloni", "koji žele jednostavan pregled slobodnih termina po frizerima/terapeutima i lako zakazivanje."],
-              ["Spa i wellness centri", "kojima je potrebno upravljanje posjetama i uslugama na više lokacija."],
-              ["Nail barovi i saloni za njegu obrva/trepavica", "koji žele privući klijente jednostavnim online bukingom i modernom digitalnom karticom lojalnosti."],
-            ].map(([t, d]) => (
-              <li key={t} className="flex gap-3">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                <div>
-                  <div className="text-sm font-medium">{t}</div>
-                  <div className="text-xs text-muted-foreground">{d}</div>
+              {
+                title: "Estetske i dermatološke klinike",
+                desc: "Kojima je potreban elektronski karton pacijenta sa detaljnim praćenjem historije tretmana i zahvata.",
+                icon: HeartPulse,
+              },
+              {
+                title: "Kozmetički saloni i saloni ljepote",
+                desc: "Koji žele brzu rezervaciju tretmana uz ugrađen loyalty sistem za zadržavanje klijenata.",
+                icon: Sparkles,
+              },
+              {
+                title: "Frizerski i stilski saloni",
+                desc: "Koji žele jednostavan pregled slobodnih termina po frizerima/terapeutima i lako zakazivanje.",
+                icon: Scissors,
+              },
+              {
+                title: "Spa i wellness centri",
+                desc: "Kojima je potrebno upravljanje posjetama i uslugama na više lokacija.",
+                icon: Flower2,
+              },
+              {
+                title: "Nail barovi i saloni za obrve/trepavice",
+                desc: "Koji žele privući klijente jednostavnim online bukingom i modernom digitalnom karticom lojalnosti.",
+                icon: Building2,
+                className: "sm:col-span-2",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className={`rounded-xl border border-border bg-background/50 p-4 hover:border-brand/40 hover:shadow-xs transition-all duration-300 flex flex-col gap-2 ${item.className || ""
+                  }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="grid h-8 w-8 place-items-center rounded-lg bg-brand/10 text-brand">
+                    <item.icon className="h-4.5 w-4.5" />
+                  </div>
+                  <h3 className="text-xs font-semibold text-foreground leading-tight">
+                    {item.title}
+                  </h3>
                 </div>
-              </li>
+                <p className="text-[11px] leading-relaxed text-muted-foreground">
+                  {item.desc}
+                </p>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
-        <div className="rounded-xl border border-border bg-background p-5">
-          <img
-            src="https://placehold.co/400x600?text=Platform+Preview"
-            alt="Platform preview"
-            className="h-auto w-full rounded-lg object-cover"
-          />
+
+        {/* Right side: iPhone Mockup */}
+        <div className="relative flex items-center justify-center py-4">
+          {/* Ambient Glow */}
+          <div className="absolute w-72 h-72 rounded-full bg-brand/15 blur-3xl -z-10" />
+
+          {/* iPhone Device Wrapper */}
+          <div className="relative w-[290px] h-[590px] rounded-[48px] p-[10px] bg-neutral-900 shadow-2xl ring-4 ring-neutral-800/10 transition-transform duration-500 hover:scale-[1.02] overflow-hidden">
+            {/* Dynamic Island */}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-6 rounded-full bg-neutral-900 z-30 flex items-center justify-center">
+              <div className="w-2.5 h-2.5 rounded-full bg-neutral-950/80 mr-2" />
+              <div className="w-1.5 h-1.5 rounded-full bg-neutral-950/80" />
+            </div>
+
+            {/* Speaker Line */}
+            <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-1 rounded-full bg-neutral-950 z-30" />
+
+            {/* Screen Content */}
+            <div className="relative w-full h-full rounded-[38px] overflow-hidden bg-neutral-100 border border-neutral-950">
+              <img
+                src="https://placehold.co/400x800?text=Platform+Preview"
+                alt="Platform preview"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -334,17 +546,17 @@ function Traditional() {
   const products = [
     {
       title: "Mobilna aplikacija za uposlenike",
-      image: "https://placehold.co/600x400?text=App+Uposlenici",
+      image: "https://placehold.co/600x900?text=App+Uposlenici",
       features: [
         "Upravljanje terminima i kalendar",
-        "Pregled klijenata i istorije",
+        "Pregled klijenata i historije",
         "Notifikacije i podsjetnici",
-        "Interna komunikacija tima",
+        "Upravljanje smjenama i pauzama",
       ],
     },
     {
       title: "Mobilna aplikacija za klijente",
-      image: "https://placehold.co/600x400?text=App+Klijenti",
+      image: "https://placehold.co/600x900?text=App+Klijenti",
       features: [
         "Online rezervacija termina",
         "Pregled usluga i cjenovnika",
@@ -354,7 +566,7 @@ function Traditional() {
     },
     {
       title: "Web stranica",
-      image: "https://placehold.co/600x400?text=Web+Stranica",
+      image: "https://placehold.co/800x500?text=Web+Stranica",
       features: [
         "Prezentacija brenda i usluga",
         "Online booking integracija",
@@ -373,25 +585,61 @@ function Traditional() {
           Povežite se sa svojim klijentima tamo gdje su — na mobitelu i webu.
         </p>
       </div>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
-        {products.map((p) => (
-          <div key={p.title} className="flex flex-col rounded-2xl border border-border bg-card p-5">
-            <div className="overflow-hidden rounded-xl border border-border bg-muted">
-              <img
-                src={p.image}
-                alt={p.title}
-                className="h-auto w-full object-cover"
-              />
+      <div className="mt-10 grid gap-6 md:grid-cols-3 items-stretch">
+        {products.map((p, idx) => (
+          <div key={p.title} className="flex flex-col rounded-2xl border border-border bg-card p-5 h-full hover:border-brand/40 hover:shadow-md transition-all duration-300">
+            {/* Mockup Container */}
+            <div className="h-[320px] flex items-center justify-center overflow-hidden bg-muted/20 rounded-xl p-4 border border-border/50 relative mb-4">
+              {idx < 2 ? (
+                /* iPhone Mockup */
+                <div className="relative w-[140px] h-[280px] rounded-[26px] p-[6px] bg-neutral-900 shadow-lg ring-2 ring-neutral-800/10 overflow-hidden">
+                  {/* Dynamic Island */}
+                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-3 rounded-full bg-neutral-900 z-30 flex items-center justify-center">
+                    <div className="w-1 h-1 rounded-full bg-neutral-950/80 mr-1" />
+                    <div className="w-0.5 h-0.5 rounded-full bg-neutral-950/80" />
+                  </div>
+                  {/* Speaker Line */}
+                  <div className="absolute top-0.5 left-1/2 -translate-x-1/2 w-5 h-0.5 rounded-full bg-neutral-950 z-30" />
+                  {/* Screen Content */}
+                  <div className="relative w-full h-full rounded-[20px] overflow-hidden bg-neutral-100 border border-neutral-950">
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              ) : (
+                /* Laptop Mockup */
+                <div className="w-full max-w-[260px] flex flex-col items-center">
+                  <div className="relative w-full aspect-[16/10] rounded-t-xl border-[5px] border-neutral-900 bg-neutral-900 shadow-md overflow-hidden">
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {/* Base */}
+                  <div className="relative w-[112%] h-[3px] sm:h-[5px] md:h-[6px] bg-neutral-800 rounded-b-xl border-t border-neutral-700 shadow-md z-10" />
+                  <div className="relative w-[20%] h-[1.5px] sm:h-[2.5px] md:h-[3px] bg-neutral-900 rounded-b-md z-10" />
+                </div>
+              )}
             </div>
-            <h3 className="mt-4 text-base font-semibold">{p.title}</h3>
-            <ul className="mt-3 space-y-2">
-              {p.features.map((f) => (
-                <li key={f} className="flex items-start gap-2 text-xs text-muted-foreground">
-                  <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand" />
-                  {f}
-                </li>
-              ))}
-            </ul>
+
+            {/* Info Area */}
+            <div className="flex flex-col flex-1 justify-between">
+              <div>
+                <h3 className="text-base font-semibold text-foreground">{p.title}</h3>
+                <ul className="mt-4 space-y-2.5">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-xs text-muted-foreground leading-normal">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -429,10 +677,10 @@ function Faq() {
   const items = [
     ["Da li klijenti u aplikaciji vide druge salone ili je ona brendirana samo za nas?", "Aplikacija je potpuno brendirana isključivo za vaš biznis. Na App Store-u i Google Play-u ona se pojavljuje pod nazivom vaše klinike ili salona, sa vašim logotipom i bojama. Vaši klijenti nemaju dodira sa drugim salonima; za njih je to vaša privatna mobilna aplikacija."],
     ["Koliko vremena je potrebno da pokrenemo aplikaciju za naš salon ili kliniku?", "Proces implementacije obično traje između 2 i 3 sedmice. To uključuje prilagođavanje vizuelnog identiteta aplikacije vašem brendu, unos vaših lokacija, usluga i zaposlenika, testiranje sistema, te proces objave aplikacije na Apple i Google prodavnicama. Naš tim obavlja sav tehnički posao za vas."],
-    ["Šta se dešava sa našom postojećom bazom klijenata? Da li moramo sve ručno unositi?", "Nema potrebe za ručnim unosom. Naš tehnički tim vrši besplatnu migraciju vaših postojećih podataka (kontakti klijenata, istorija posjeta i bilješke) iz vašeg starog softvera ili Excel tabela direktno u novi sistem, tako da možete odmah nastaviti sa radom."],
+    ["Šta se dešava sa našom postojećom bazom klijenata? Da li moramo sve ručno unositi?", "Nema potrebe za ručnim unosom. Naš tehnički tim vrši besplatnu migraciju vaših postojećih podataka (kontakti klijenata, historija posjeta i bilješke) iz vašeg starog softvera ili Excel tabela direktno u novi sistem, tako da možete odmah nastaviti sa radom."],
     ["Koju opremu moramo imati u salonu/klinici da bismo koristili sistem?", "Zaposlenička aplikacija radi na bilo kojem modernom pametnom telefonu ili tabletu (iOS i Android). Za recepciju ili radne prostorije možete koristiti tablet radi lakšeg pregleda kalendara, dok vaši zaposlenici mogu koristiti svoje mobilne telefone za brzi pregled zakazanih termina, skeniranje klijentskih QR kodova i unošenje bilješki o tretmanima."],
     ["Kako sistem sprečava preklapanje termina (double-booking)?", "Sistem koristi sinhronizaciju podataka u realnom vremenu. U trenutku kada klijent rezerviše termin za određenu uslugu kod određenog zaposlenika, taj vremenski slot se automatski bilježi i zaključava. Na taj način je kalendar zaposlenika uvijek tačan i nema mogućnosti da dva klijenta rezervišu isti termin u isto vrijeme."],
-    ["Na koji način se čuvaju kartoni klijenata i da li je sistem usklađen sa GDPR-om?", "Svi podaci o klijentima, istorija posjeta i kartoni tretmana se čuvaju na sigurnim cloud serverima sa visokim stepenom zaštite. Podaci su enkriptovani, a sistem je usklađen sa GDPR regulativom – klijenti imaju uvid u svoje podatke i istoriju direktno kroz svoju aplikaciju, što garantuje maksimalnu privatnost."],
+    ["Na koji način se čuvaju kartoni klijenata i da li je sistem usklađen sa GDPR-om?", "Svi podaci o klijentima, historija posjeta i kartoni tretmana se čuvaju na sigurnim cloud serverima sa visokim stepenom zaštite. Podaci su enkriptovani, a sistem je usklađen sa GDPR regulativom – klijenti imaju uvid u svoje podatke i historija direktno kroz svoju aplikaciju, što garantuje maksimalnu privatnost."],
     ["Šta ako naš salon ima više lokacija? Možemo li upravljati svima kroz aplikaciju?", "Da, sistem u potpunosti podržava rad na više lokacija. Klijenti prilikom zakazivanja termina u svojoj aplikaciji jednostavno biraju lokaciju (poslovnicu) na kojoj žele rezervisati tretman, a sistem sve raspoređuje na odgovarajući kalendar za tu lokaciju."],
   ];
   const [open, setOpen] = useState(0);
@@ -464,9 +712,8 @@ function Faq() {
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-medium">{q}</span>
                 <ChevronDown
-                  className={`h-4 w-4 shrink-0 text-muted-foreground transition ${
-                    open === i ? "rotate-180" : ""
-                  }`}
+                  className={`h-4 w-4 shrink-0 text-muted-foreground transition ${open === i ? "rotate-180" : ""
+                    }`}
                 />
               </div>
               {open === i && (
@@ -512,7 +759,7 @@ function Footer() {
             </span>
           ))}
         </nav>
-        <p className="text-xs text-muted-foreground">2025 RealEstate Pro</p>
+        <p className="text-xs text-muted-foreground">2025 GlowBook App</p>
       </div>
     </footer>
   );
@@ -530,7 +777,7 @@ function Index() {
         <Traditional />
         <Pillars />
         <Faq />
-        
+
         <CtaStrip />
         <Footer />
       </div>

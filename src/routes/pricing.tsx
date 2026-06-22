@@ -5,13 +5,13 @@ import { Logo } from "@/components/Logo";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Cjenovnik — RealEstate Pro" },
+      { title: "Cjenovnik — GlowBook App" },
       {
         name: "description",
         content:
           "Odaberite paket koji najbolje odgovara vašem biznisu. Aplikacije za uposlenike, klijente i web stranica.",
       },
-      { property: "og:title", content: "Cjenovnik — RealEstate Pro" },
+      { property: "og:title", content: "Cjenovnik — GlowBook App" },
       {
         property: "og:description",
         content: "Odaberite paket koji najbolje odgovara vašem biznisu.",
@@ -68,9 +68,9 @@ const packages = [
       "Upravljanje terminima i kalendar",
       "Pregled klijenata i historije",
       "Notifikacije i podsjetnici",
-      "Interna komunikacija tima",
       "Online booking integracija",
-      "SEO optimizacija",
+      "Višelokacijska podrška",
+      "Loyalty program",
     ],
     cta: "Započnite",
     highlighted: false,
@@ -189,10 +189,10 @@ function ComparisonTable() {
     { feature: "Aplikacija za klijente", basic: false, advanced: true, premium: true },
     { feature: "Online rezervacija", basic: true, advanced: true, premium: true },
     { feature: "Upravljanje terminima", basic: true, advanced: true, premium: true },
-    { feature: "Loyalty program", basic: false, advanced: true, premium: true },
+    { feature: "Loyalty program", basic: true, advanced: true, premium: true },
     { feature: "Push notifikacije", basic: false, advanced: true, premium: true },
     { feature: "Elektronski karton", basic: false, advanced: false, premium: true },
-    { feature: "Više lokacija", basic: false, advanced: true, premium: true },
+    { feature: "Više lokacija", basic: true, advanced: true, premium: true },
     { feature: "Prioritetna podrška", basic: false, advanced: false, premium: true },
   ];
 
@@ -268,7 +268,7 @@ function Footer() {
     <footer className="mx-auto max-w-6xl px-6 py-8">
       <div className="flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
         <Logo />
-        <p className="text-xs text-muted-foreground">2025 RealEstate Pro</p>
+        <p className="text-xs text-muted-foreground">2025 GlowBook App</p>
       </div>
     </footer>
   );

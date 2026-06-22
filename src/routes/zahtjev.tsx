@@ -12,7 +12,7 @@ export const Route = createFileRoute("/zahtjev")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Zahtjev — RealEstate Pro" },
+      { title: "Zahtjev — GlowBook App" },
       { name: "description", content: "Pošaljite zahtjev za odabrani paket." },
     ],
   }),
