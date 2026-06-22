@@ -40,6 +40,13 @@ export const Route = createFileRoute("/")({
 });
 
 import { Logo } from "@/components/Logo";
+import empSlika15 from "@/assets/screens/uposlenici/slika-15.png";
+import empSlika16 from "@/assets/screens/uposlenici/slika-16.png";
+
+import clientSlika1 from "@/assets/screens/klijenti/slika-1.png";
+import webSlika1 from "@/assets/screens/web/slika-1.png";
+import appMarket1 from "@/assets/screens/mockup/appmarket-1.png";
+import appMarket2 from "@/assets/screens/mockup/appmarket-2.png";
 
 function Nav() {
   const items = [
@@ -112,11 +119,10 @@ function Hero() {
             <button
               key={tab.id}
               onClick={() => setActiveDevice(tab.id as any)}
-              className={`flex-1 py-1.5 px-3 text-xs font-semibold rounded-full transition-all ${
-                activeDevice === tab.id
-                  ? "bg-brand text-white shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+              className={`flex-1 py-1.5 px-3 text-xs font-semibold rounded-full transition-all ${activeDevice === tab.id
+                ? "bg-brand text-white shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+                }`}
             >
               {tab.label}
             </button>
@@ -128,18 +134,20 @@ function Hero() {
           {/* 1. Desktop Computer Mockup in the Background */}
           <div className="w-[80%] md:w-[75%] flex flex-col items-center z-10 transition-transform duration-500 hover:scale-[1.01]">
             {/* Browser Frame */}
-            <div className="w-full rounded-t-2xl border-[6px] border-neutral-900 bg-neutral-900 shadow-2xl overflow-hidden aspect-[16/10]">
+            <div className="w-full rounded-t-2xl border-[6px] border-neutral-900 bg-neutral-900 shadow-2xl aspect-[16/10] flex flex-col overflow-hidden">
               {/* Browser header bar */}
-              <div className="h-5 bg-neutral-900 px-3 flex items-center gap-1.5">
+              <div className="h-5 bg-neutral-900 px-3 flex items-center gap-1.5 shrink-0">
                 <div className="w-2 h-2 rounded-full bg-red-500/80" />
                 <div className="w-2 h-2 rounded-full bg-yellow-500/80" />
                 <div className="w-2 h-2 rounded-full bg-green-500/80" />
               </div>
-              <img
-                src="https://placehold.co/1200x750?text=Web+Dashboard"
-                alt="Web Dashboard"
-                className="w-full h-full object-cover"
-              />
+              <div className="flex-1 overflow-y-auto scrollbar-none bg-neutral-100">
+                <img
+                  src={webSlika1}
+                  alt="Web Dashboard"
+                  className="w-full h-auto object-contain object-top"
+                />
+              </div>
             </div>
             {/* Laptop/Desktop Base */}
             <div className="w-[112%] h-[6px] sm:h-[8px] bg-neutral-800 rounded-b-xl border-t border-neutral-700 shadow-md" />
@@ -162,7 +170,7 @@ function Hero() {
               {/* Screen Content */}
               <div className="relative w-full h-full rounded-[18px] sm:rounded-[24px] md:rounded-[26px] overflow-hidden bg-neutral-100 border border-neutral-950">
                 <img
-                  src="https://placehold.co/600x1200?text=App+Uposlenici"
+                  src={empSlika15}
                   alt="Employee App"
                   className="w-full h-full object-cover"
                 />
@@ -186,7 +194,7 @@ function Hero() {
               {/* Screen Content */}
               <div className="relative w-full h-full rounded-[18px] sm:rounded-[24px] md:rounded-[26px] overflow-hidden bg-neutral-100 border border-neutral-950">
                 <img
-                  src="https://placehold.co/600x1200?text=App+Klijenti"
+                  src={clientSlika1}
                   alt="Client App"
                   className="w-full h-full object-cover"
                 />
@@ -199,17 +207,19 @@ function Hero() {
         <div className="flex sm:hidden w-full items-center justify-center overflow-visible animate-fade-in">
           {activeDevice === "web" && (
             <div className="w-[90%] flex flex-col items-center">
-              <div className="w-full rounded-t-xl border-[4px] border-neutral-900 bg-neutral-900 shadow-xl overflow-hidden aspect-[16/10]">
-                <div className="h-4 bg-neutral-900 px-2 flex items-center gap-1">
+              <div className="w-full rounded-t-xl border-[4px] border-neutral-900 bg-neutral-900 shadow-xl aspect-[16/10] flex flex-col overflow-hidden">
+                <div className="h-4 bg-neutral-900 px-2 flex items-center gap-1 shrink-0">
                   <div className="w-1.5 h-1.5 rounded-full bg-red-500/80" />
                   <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/80" />
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500/80" />
                 </div>
-                <img
-                  src="https://placehold.co/1200x750?text=Web+Dashboard"
-                  alt="Web Dashboard"
-                  className="w-full h-full object-cover"
-                />
+                <div className="flex-1 overflow-y-auto scrollbar-none bg-neutral-100">
+                  <img
+                    src={webSlika1}
+                    alt="Web Dashboard"
+                    className="w-full h-auto object-contain object-top"
+                  />
+                </div>
               </div>
               <div className="w-[112%] h-[4px] bg-neutral-800 rounded-b-lg border-t border-neutral-700 shadow-sm" />
               <div className="w-[20%] h-[2px] bg-neutral-950 rounded-b-xs" />
@@ -229,7 +239,7 @@ function Hero() {
                 {/* Screen Content */}
                 <div className="relative w-full h-full rounded-[18px] overflow-hidden bg-neutral-100 border border-neutral-950">
                   <img
-                    src="https://placehold.co/600x1200?text=App+Uposlenici"
+                    src={empSlika15}
                     alt="Employee App"
                     className="w-full h-full object-cover"
                   />
@@ -530,7 +540,7 @@ function RealtimeSection() {
             {/* Screen Content */}
             <div className="relative w-full h-full rounded-[38px] overflow-hidden bg-neutral-100 border border-neutral-950">
               <img
-                src="https://placehold.co/400x800?text=Platform+Preview"
+                src={empSlika16}
                 alt="Platform preview"
                 className="w-full h-full object-cover"
               />
@@ -546,7 +556,7 @@ function Traditional() {
   const products = [
     {
       title: "Mobilna aplikacija za uposlenike",
-      image: "https://placehold.co/600x900?text=App+Uposlenici",
+      image: empSlika15,
       features: [
         "Upravljanje terminima i kalendar",
         "Pregled klijenata i historije",
@@ -556,7 +566,7 @@ function Traditional() {
     },
     {
       title: "Mobilna aplikacija za klijente",
-      image: "https://placehold.co/600x900?text=App+Klijenti",
+      image: clientSlika1,
       features: [
         "Online rezervacija termina",
         "Pregled usluga i cjenovnika",
@@ -566,7 +576,7 @@ function Traditional() {
     },
     {
       title: "Web stranica",
-      image: "https://placehold.co/800x500?text=Web+Stranica",
+      image: webSlika1,
       features: [
         "Prezentacija brenda i usluga",
         "Online booking integracija",
@@ -612,12 +622,14 @@ function Traditional() {
               ) : (
                 /* Laptop Mockup */
                 <div className="w-full max-w-[260px] flex flex-col items-center">
-                  <div className="relative w-full aspect-[16/10] rounded-t-xl border-[5px] border-neutral-900 bg-neutral-900 shadow-md overflow-hidden">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="relative w-full aspect-[16/10] rounded-t-xl border-[5px] border-neutral-900 bg-neutral-900 shadow-md flex flex-col overflow-hidden">
+                    <div className="flex-1 overflow-y-auto scrollbar-none bg-neutral-100">
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        className="w-full h-auto object-contain object-top"
+                      />
+                    </div>
                   </div>
                   {/* Base */}
                   <div className="relative w-[112%] h-[3px] sm:h-[5px] md:h-[6px] bg-neutral-800 rounded-b-xl border-t border-neutral-700 shadow-md z-10" />
@@ -642,6 +654,77 @@ function Traditional() {
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function AppMarketSection() {
+  return (
+    <section className="mx-auto max-w-6xl px-6 py-16">
+      <div className="bg-card border border-border rounded-2xl p-8 md:p-12 relative overflow-hidden space-y-12">
+        {/* Decorative background glow */}
+        <div className="absolute w-96 h-96 rounded-full bg-brand/5 blur-3xl -top-24 -right-24 -z-10" />
+        
+        {/* Heading */}
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-3 py-1 text-xs text-brand">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Brendirane Aplikacije</span>
+          </div>
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl leading-tight">
+            Vaša klinika ili salon na mobilnim prodavnicama
+          </h2>
+          <p className="text-[15px] leading-relaxed text-muted-foreground">
+            Kreiramo i objavljujemo potpuno brendirane mobilne aplikacije pod nazivom vašeg brenda. Vaši klijenti preuzimaju aplikaciju direktno sa zvaničnih prodavnica, sa vašim logotipom, opisima i vizuelnim identitetom.
+          </p>
+        </div>
+
+        {/* 50/50 Images Grid */}
+        <div className="grid grid-cols-2 gap-4 md:gap-8">
+          <div className="rounded-2xl overflow-hidden border border-border/80 shadow-lg bg-neutral-900 group">
+            <img
+              src={appMarket1}
+              alt="App Store Listing 1"
+              className="w-full h-auto object-contain group-hover:scale-[1.01] transition-transform duration-500"
+            />
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-border/80 shadow-lg bg-neutral-900 group">
+            <img
+              src={appMarket2}
+              alt="App Store Listing 2"
+              className="w-full h-auto object-contain group-hover:scale-[1.01] transition-transform duration-500"
+            />
+          </div>
+        </div>
+
+        {/* Features Below Images */}
+        <div className="grid gap-6 md:grid-cols-3 pt-8 border-t border-border/50">
+          {[
+            {
+              t: "Sopstveni račun i naziv aplikacije",
+              d: "Aplikacija se objavljuje pod vašim imenom, dajući vašem biznisu maksimalan profesionalizam i prepoznatljivost."
+            },
+            {
+              t: "Kompletna tehnička podrška",
+              d: "Naš tim preuzima cijeli proces pripreme, konfiguracije i objave na Apple App Store i Google Play Store."
+            },
+            {
+              t: "Automatska ažuriranja",
+              d: "Pratimo sve promjene operativnih sistema i redovno ažuriramo aplikacije kako bi radile besprijekorno na svim iOS i Android uređajima."
+            }
+          ].map((item, idx) => (
+            <div key={idx} className="flex gap-3 bg-background/40 p-4 rounded-xl border border-border/40 hover:border-brand/30 transition-colors duration-300">
+              <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand">
+                <Check className="h-3 w-3" />
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-foreground">{item.t}</h4>
+                <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">{item.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -772,6 +855,7 @@ function Index() {
         <Nav />
         <Hero />
         <Stats />
+        <AppMarketSection />
         <Features />
         <RealtimeSection />
         <Traditional />

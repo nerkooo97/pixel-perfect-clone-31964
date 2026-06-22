@@ -57,33 +57,6 @@ function Nav() {
   );
 }
 
-const infoCards = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "info@glowbook.app",
-    sub: "Odgovaramo u roku od 24h",
-  },
-  {
-    icon: Phone,
-    label: "Telefon",
-    value: "+387 33 123 456",
-    sub: "Pon - Pet, 09:00 - 17:00",
-  },
-  {
-    icon: MapPin,
-    label: "Adresa",
-    value: "Sarajevo, BiH",
-    sub: "Posjeta po dogovoru",
-  },
-  {
-    icon: Clock,
-    label: "Radno vrijeme",
-    value: "09:00 - 17:00",
-    sub: "Ponedjeljak - Petak",
-  },
-];
-
 const inputCls =
   "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand";
 
@@ -94,19 +67,60 @@ function ContactForm() {
     telefon: "",
     poruka: "",
   });
+  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
   const valid = data.ime.trim() && data.email.trim() && data.poruka.trim();
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!valid) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "2f33f393-6829-430a-ba3c-dc7b40547900";
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: data.ime,
+          email: data.email,
+          phone: data.telefon,
+          message: data.poruka,
+          subject: "Nova poruka sa kontakt forme - GlowBook.app",
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok && result.success) {
+        setSent(true);
+      } else {
+        setError(result.message || "Došlo je do greške prilikom slanja poruke.");
+      }
+    } catch (err) {
+      setError("Došlo je do mrežne greške. Molimo pokušajte ponovo.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (sent) {
     return (
-      <div className="rounded-2xl border border-border bg-card p-8 text-center">
+      <div className="rounded-2xl border border-border bg-card p-8 text-center animate-fade-in">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand/10">
           <Check className="h-6 w-6 text-brand" />
         </div>
-        <h3 className="mt-5 text-lg font-semibold">Poruka poslana!</h3>
+        <h3 className="mt-5 text-lg font-semibold text-foreground">Poruka poslana!</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Hvala vam na poruci. Javit ćemo vam se uskoro.
+          Hvala vam na poruci. Javit ćemo vam se uskoro na vaš email.
         </p>
       </div>
     );
@@ -114,24 +128,22 @@ function ContactForm() {
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (valid) setSent(true);
-      }}
-      className="space-y-4 rounded-2xl border border-border bg-card p-6 md:p-8"
+      onSubmit={handleSubmit}
+      className="space-y-4 rounded-2xl border border-border bg-card p-6 md:p-8 shadow-sm"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1.5 block text-xs font-medium">Ime i prezime</span>
+          <span className="mb-1.5 block text-xs font-medium text-foreground">Ime i prezime</span>
           <input
             className={inputCls}
             value={data.ime}
             onChange={(e) => setData({ ...data, ime: e.target.value })}
             placeholder="Vaše ime"
+            required
           />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-xs font-medium">Telefon</span>
+          <span className="mb-1.5 block text-xs font-medium text-foreground">Telefon</span>
           <input
             className={inputCls}
             value={data.telefon}
@@ -141,63 +153,49 @@ function ContactForm() {
         </label>
       </div>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-medium">Email</span>
+        <span className="mb-1.5 block text-xs font-medium text-foreground">Email</span>
         <input
           type="email"
           className={inputCls}
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
           placeholder="email@primjer.com"
+          required
         />
       </label>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-medium">Poruka</span>
+        <span className="mb-1.5 block text-xs font-medium text-foreground">Poruka</span>
         <textarea
           className={`${inputCls} min-h-[140px] resize-y`}
           value={data.poruka}
           onChange={(e) => setData({ ...data, poruka: e.target.value })}
           placeholder="Kako vam možemo pomoći?"
+          required
         />
       </label>
+
+      {error && (
+        <div className="rounded-lg bg-red-500/10 p-3 text-xs text-red-500">
+          {error}
+        </div>
+      )}
+
       <button
         type="submit"
-        disabled={!valid}
-        className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-40"
+        disabled={!valid || loading}
+        className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-40 transition-all active:scale-[0.98]"
       >
-        Pošalji poruku <Send className="h-3.5 w-3.5" />
+        {loading ? "Slanje..." : "Pošalji poruku"}
+        {!loading && <Send className="h-3.5 w-3.5" />}
       </button>
     </form>
-  );
-}
-
-function ContactInfo() {
-  return (
-    <div className="grid gap-3">
-      {infoCards.map(({ icon: Icon, label, value, sub }) => (
-        <div
-          key={label}
-          className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5"
-        >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand/10">
-            <Icon className="h-5 w-5 text-brand" />
-          </div>
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              {label}
-            </p>
-            <p className="mt-1 text-sm font-medium text-foreground">{value}</p>
-            <p className="mt-0.5 text-xs text-muted-foreground">{sub}</p>
-          </div>
-        </div>
-      ))}
-    </div>
   );
 }
 
 function Hero() {
   return (
     <section className="mx-auto max-w-6xl px-6 pt-16 pb-6 text-center">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">
         Kontakt
       </p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
@@ -228,11 +226,8 @@ function KontaktPage() {
       <div className="mx-auto max-w-7xl bg-background">
         <Nav />
         <Hero />
-        <section className="mx-auto max-w-6xl px-6 pb-12">
-          <div className="grid gap-6 md:grid-cols-[3fr_2fr]">
-            <ContactForm />
-            <ContactInfo />
-          </div>
+        <section className="mx-auto max-w-2xl px-6 pb-20">
+          <ContactForm />
         </section>
         <Footer />
       </div>

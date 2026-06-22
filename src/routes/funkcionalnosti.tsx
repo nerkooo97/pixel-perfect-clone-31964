@@ -35,6 +35,33 @@ import webMockup from "@/assets/web-mockup.jpg";
 import employeeMockup from "@/assets/employee-app-mockup.jpg";
 import clientMockup from "@/assets/client-app-mockup.jpg";
 
+import webSlika1 from "@/assets/screens/web/slika-1.png";
+
+import empSlika1 from "@/assets/screens/uposlenici/slika-1.png";
+import empSlika2 from "@/assets/screens/uposlenici/slika-2.png";
+import empSlika3 from "@/assets/screens/uposlenici/slika-3.png";
+import empSlika4 from "@/assets/screens/uposlenici/slika-4.png";
+import empSlika5 from "@/assets/screens/uposlenici/slika-5.png";
+import empSlika6 from "@/assets/screens/uposlenici/slika-6.png";
+import empSlika7 from "@/assets/screens/uposlenici/slika-7.png";
+import empSlika8 from "@/assets/screens/uposlenici/slika-8.png";
+import empSlika9 from "@/assets/screens/uposlenici/slika-9.png";
+import empSlika10 from "@/assets/screens/uposlenici/slika-10.png";
+import empSlika11 from "@/assets/screens/uposlenici/slika-11.png";
+import empSlika12 from "@/assets/screens/uposlenici/slika-12.png";
+import empSlika13 from "@/assets/screens/uposlenici/slika-13.png";
+import empSlika14 from "@/assets/screens/uposlenici/slika-14.png";
+import empSlika16 from "@/assets/screens/uposlenici/slika-16.png";
+
+import clientSlika1 from "@/assets/screens/klijenti/slika-1.png";
+import clientSlika2 from "@/assets/screens/klijenti/slika-2.png";
+import clientSlika3 from "@/assets/screens/klijenti/slika-3.png";
+import clientSlika4 from "@/assets/screens/klijenti/slika-4.png";
+import clientSlika5 from "@/assets/screens/klijenti/slika-5.png";
+import clientSlika6 from "@/assets/screens/klijenti/slika-6.png";
+import clientSlika7 from "@/assets/screens/klijenti/slika-7.png";
+import clientSlika8 from "@/assets/screens/klijenti/slika-8.png";
+
 export const Route = createFileRoute("/funkcionalnosti")({
   head: () => ({
     meta: [
@@ -131,15 +158,31 @@ function FeaturesPage() {
   const [activeBrandingDevice, setActiveBrandingDevice] = useState<"employee" | "client">("employee");
 
   const empSlides = [
-    "https://placehold.co/600x1200?text=Uposlenici:+Kalendar+Termina",
-    "https://placehold.co/600x1200?text=Uposlenici:+Karton+Klijenta",
-    "https://placehold.co/600x1200?text=Uposlenici:+Statistika+Rada",
+    empSlika1,
+    empSlika2,
+    empSlika3,
+    empSlika4,
+    empSlika5,
+    empSlika6,
+    empSlika7,
+    empSlika8,
+    empSlika9,
+    empSlika10,
+    empSlika11,
+    empSlika12,
+    empSlika13,
+    empSlika14,
   ];
 
   const clientSlides = [
-    "https://placehold.co/600x1200?text=Klijenti:+Buking+Usluga",
-    "https://placehold.co/600x1200?text=Klijenti:+Kartica+Lojalnosti",
-    "https://placehold.co/600x1200?text=Klijenti:+Moji+Termini",
+    clientSlika1,
+    clientSlika2,
+    clientSlika3,
+    clientSlika4,
+    clientSlika5,
+    clientSlika6,
+    clientSlika7,
+    clientSlika8,
   ];
 
   // Auto-rotating slider logic
@@ -208,11 +251,10 @@ function FeaturesPage() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveBrandingDevice(tab.id as any)}
-                    className={`flex-1 py-1.5 px-3 text-[11px] font-semibold rounded-full transition-all ${
-                      activeBrandingDevice === tab.id
+                    className={`flex-1 py-1.5 px-3 text-[11px] font-semibold rounded-full transition-all ${activeBrandingDevice === tab.id
                         ? "bg-brand text-white shadow-sm"
                         : "text-muted-foreground hover:text-foreground"
-                    }`}
+                      }`}
                   >
                     {tab.label}
                   </button>
@@ -237,7 +279,7 @@ function FeaturesPage() {
                     {/* Screen Content */}
                     <div className="relative w-full h-full rounded-[16px] sm:rounded-[20px] md:rounded-[23px] overflow-hidden bg-neutral-100 border border-neutral-950">
                       <img
-                        src={employeeMockup}
+                        src={empSlika16}
                         alt="Employee App Branding"
                         className="w-full h-full object-cover"
                       />
@@ -261,7 +303,7 @@ function FeaturesPage() {
                     {/* Screen Content */}
                     <div className="relative w-full h-full rounded-[16px] sm:rounded-[20px] md:rounded-[23px] overflow-hidden bg-neutral-100 border border-neutral-950">
                       <img
-                        src={clientMockup}
+                        src={clientSlika1}
                         alt="Client App Branding"
                         className="w-full h-full object-cover"
                       />
@@ -285,7 +327,7 @@ function FeaturesPage() {
                       {/* Screen Content */}
                       <div className="relative w-full h-full rounded-[16px] overflow-hidden bg-neutral-100 border border-neutral-950">
                         <img
-                          src={employeeMockup}
+                          src={empSlika16}
                           alt="Employee App Branding"
                           className="w-full h-full object-cover"
                         />
@@ -328,18 +370,20 @@ function FeaturesPage() {
               {/* Laptop Mockup */}
               <div className="w-full max-w-[480px] flex flex-col items-center z-10 transition-transform duration-500 hover:scale-[1.01]">
                 {/* Browser Frame */}
-                <div className="w-full rounded-t-2xl border-[6px] border-neutral-900 bg-neutral-900 shadow-2xl overflow-hidden aspect-[16/10]">
+                <div className="w-full rounded-t-2xl border-[6px] border-neutral-900 bg-neutral-900 shadow-2xl aspect-[16/10] flex flex-col overflow-hidden">
                   {/* Browser header bar */}
-                  <div className="h-5 bg-neutral-900 px-3 flex items-center gap-1.5">
+                  <div className="h-5 bg-neutral-900 px-3 flex items-center gap-1.5 shrink-0">
                     <div className="w-2 h-2 rounded-full bg-red-500/80" />
                     <div className="w-2 h-2 rounded-full bg-yellow-500/80" />
                     <div className="w-2 h-2 rounded-full bg-green-500/80" />
                   </div>
-                  <img
-                    src={webMockup}
-                    alt="Web Booking Platform"
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="flex-1 overflow-y-auto scrollbar-none bg-neutral-100">
+                    <img
+                      src={webSlika1}
+                      alt="Web Booking Platform"
+                      className="w-full h-auto object-contain object-top"
+                    />
+                  </div>
                 </div>
                 {/* Base */}
                 <div className="w-[112%] h-[4px] sm:h-[6px] md:h-[8px] bg-neutral-800 rounded-b-xl border-t border-neutral-700 shadow-md" />
@@ -434,17 +478,7 @@ function FeaturesPage() {
                       className="w-full h-full object-cover"
                     />
 
-                    {/* Navigation Dots Overlay */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-30 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-full">
-                      {empSlides.map((_, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setEmpSlide(i)}
-                          className={`w-1.5 h-1.5 rounded-full transition-all ${empSlide === i ? "bg-white w-3" : "bg-white/50"
-                            }`}
-                        />
-                      ))}
-                    </div>
+
 
                     {/* Left/Right Arrow Overlays */}
                     <button
@@ -495,17 +529,7 @@ function FeaturesPage() {
                       className="w-full h-full object-cover"
                     />
 
-                    {/* Navigation Dots Overlay */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-30 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-full">
-                      {clientSlides.map((_, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setClientSlide(i)}
-                          className={`w-1.5 h-1.5 rounded-full transition-all ${clientSlide === i ? "bg-white w-3" : "bg-white/50"
-                            }`}
-                        />
-                      ))}
-                    </div>
+
 
                     {/* Left/Right Arrow Overlays */}
                     <button

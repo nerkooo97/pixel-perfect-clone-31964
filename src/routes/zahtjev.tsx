@@ -68,20 +68,18 @@ function Stepper({ step }: { step: number }) {
         return (
           <div key={label} className="flex items-center gap-2">
             <div
-              className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium ${
-                done
+              className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium ${done
                   ? "bg-brand text-white"
                   : active
-                  ? "bg-foreground text-background"
-                  : "bg-muted text-muted-foreground"
-              }`}
+                    ? "bg-foreground text-background"
+                    : "bg-muted text-muted-foreground"
+                }`}
             >
               {done ? <Check className="h-3.5 w-3.5" /> : idx}
             </div>
             <span
-              className={`hidden text-xs sm:inline ${
-                active ? "font-medium text-foreground" : "text-muted-foreground"
-              }`}
+              className={`hidden text-xs sm:inline ${active ? "font-medium text-foreground" : "text-muted-foreground"
+                }`}
             >
               {label}
             </span>
@@ -120,9 +118,58 @@ function RequestPage() {
     paket: search.paket ?? "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const update = <K extends keyof FormData>(k: K, v: FormData[K]) =>
     setData((d) => ({ ...d, [k]: v }));
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "2f33f393-6829-430a-ba3c-dc7b40547900";
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: `${data.ime} ${data.prezime}`,
+          email: data.email,
+          phone: data.telefon,
+          subject: `Novi zahtjev za paket: ${data.paket || "Nije odabran"} - GlowBook.app`,
+          message: `
+Detalji zahtjeva:
+-----------------
+Odabrani paket: ${data.paket || "—"}
+Ime i prezime: ${data.ime} ${data.prezime}
+Email: ${data.email}
+Telefon: ${data.telefon || "—"}
+Naziv biznisa: ${data.nazivBiznisa}
+Broj lokacija: ${data.brojLokacija}
+Broj uposlenika: ${data.brojUposlenika}
+Specijalni zahtjevi: ${data.specijalniZahtjevi || "—"}
+          `.trim(),
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok && result.success) {
+        setSubmitted(true);
+      } else {
+        setError(result.message || "Došlo je do greške prilikom slanja zahtjeva.");
+      }
+    } catch (err) {
+      setError("Došlo je do mrežne greške. Molimo pokušajte ponovo.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const canNext1 =
     data.ime.trim() && data.prezime.trim() && data.email.trim() && data.nazivBiznisa.trim();
@@ -301,18 +348,27 @@ function RequestPage() {
                 </dl>
               </div>
 
+              {error && (
+                <div className="rounded-lg bg-red-500/10 p-3 text-xs text-red-500">
+                  {error}
+                </div>
+              )}
+
               <div className="flex justify-between">
                 <button
+                  disabled={loading}
                   onClick={() => setStep(2)}
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2 text-sm font-medium hover:bg-muted"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2 text-sm font-medium hover:bg-muted disabled:opacity-50"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" /> Nazad
                 </button>
                 <button
-                  onClick={() => setSubmitted(true)}
-                  className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white hover:bg-brand/90"
+                  disabled={loading}
+                  onClick={handleSubmit}
+                  className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white hover:bg-brand/90 disabled:opacity-50 transition-all active:scale-[0.98]"
                 >
-                  Pošalji zahtjev <Check className="h-3.5 w-3.5" />
+                  {loading ? "Slanje..." : "Pošalji zahtjev"}
+                  {!loading && <Check className="h-3.5 w-3.5" />}
                 </button>
               </div>
             </div>
